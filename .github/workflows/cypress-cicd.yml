@@ -40,7 +40,6 @@ jobs:
 
   deploy:
     needs: test
-
     permissions:
       contents: write
       pages: write
@@ -67,12 +66,18 @@ jobs:
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
+
       - run: npm install
+
+      - run: mkdir -p ./out  # Ensure the out directory exists
+
       - run: npm run build
+
       - name: upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
+
       - name: deploy
         id: deployment
         uses: actions/deploy-pages@v4
