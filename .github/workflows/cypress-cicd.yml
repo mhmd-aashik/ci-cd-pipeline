@@ -75,9 +75,11 @@ jobs:
         run: npm run build
 
       - name: Upload artifacts
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@master
         with:
-          path: "./out"
+          name: page
+          path: build
+          if-no-files-found: error
 
       - name: Deploy to GitHub Pages
         id: deployment
